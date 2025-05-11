@@ -1,8 +1,9 @@
-from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
 from sqlalchemy import URL, Engine
 from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine, create_async_engine, async_sessionmaker
+
+from cuelebre_vault.shared.config.database_settings import database_settings
 
 
 class DatabaseManager:
@@ -24,8 +25,10 @@ class DatabaseManager:
     def async_session_factory(self) -> async_sessionmaker[AsyncSession]:
         return self.__session_factory
 
-    @asynccontextmanager
     async def get_async_session(self) -> AsyncGenerator[AsyncSession, ...]:
         async with self.__session_factory() as session:
             session: AsyncSession
             yield session
+
+
+database_manager: DatabaseManager = DatabaseManager(database_settings.url)
