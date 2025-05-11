@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
+from cuelebre_vault import __version__
+from cuelebre_vault.shared.config.fastapi_settings import fastapi_settings
 from cuelebre_vault.shared.config.metadata import tags_metadata, description, summary, license_info
-from . import __version__
-from .shared.config.fastapi_settings import fastapi_settings
 
 app = FastAPI(
     title="💰 Cuelebre Vault API",
