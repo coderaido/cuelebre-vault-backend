@@ -18,8 +18,15 @@ class DatabaseSettings(BaseSettings):
 
     @property
     def url(self) -> URL:
+        return self.__create_url("postgresql")
+
+    @property
+    def async_url(self):
+        return self.__create_url("postgresql+asyncpg")
+
+    def __create_url(self, driver_name: str) -> URL:
         return URL.create(
-            drivername=self.driver,
+            drivername=driver_name,
             host=self.host,
             port=self.port,
             username=self.user,
