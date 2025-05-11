@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, AsyncEngine, create_async_engin
 from cuelebre_vault.shared.config.database_settings import database_settings
 
 
-class DatabaseManager:
+class AsyncDatabaseManager:
 
     def __init__(self, url: str | URL, **kwargs):
 
@@ -31,4 +31,4 @@ class DatabaseManager:
             yield session
 
 
-database_manager: DatabaseManager = DatabaseManager(database_settings.url)
+async_database_manager: AsyncDatabaseManager = AsyncDatabaseManager(database_settings.async_url)
